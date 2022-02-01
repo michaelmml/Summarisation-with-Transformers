@@ -155,13 +155,6 @@ def summary_cleaner(text):
             prev_word = [i]
     return (" ".join(long_words)).strip()
 
-"""    tokens = newString.split()
-    newString = ''
-    for i in tokens:
-        if len(i) > 1:
-            newString = newString + i + ' '
-    return newString"""
-
 # Call the above function
 cleaned_summary = []
 for t in data['Summary']:
@@ -193,14 +186,6 @@ max_len_summary = 20
 cleaned_text = np.array(data['cleaned_text'])
 cleaned_summary = np.array(data['cleaned_summary'])
 
-"""short_text = []
-short_summary = []
-
-for i in range(len(cleaned_text)):
-    if (len(cleaned_summary[i].split()) <= max_len_summary and len(cleaned_text[i].split()) <= max_len_text):
-        short_text.append(cleaned_text[i])
-        short_summary.append(cleaned_summary[i])"""
-
 for i in range(len(cleaned_text)):
     if len(cleaned_text[i].split()) > max_len_text:
         cleaned_text[i] = ' '.join(cleaned_text[i].split()[:max_len_text])
@@ -228,36 +213,3 @@ plt.show()
 print(max(text_word_count), max(summary_word_count))
 
 df.to_csv('financialnewssum2022.csv', index=True)
-
-#################################################################################################################
-
-import spacy
-from spacy import displacy
-
-# nlp = spacy.load('en_core_web_lg')
-# nlp.add_pipe("merge_entities")
-
-"""s = "His friend Nicolas J. Smith is here with Bart Simpson and Fred."
-doc = nlp(s)
-
-print([t.text if not t.ent_type_ else t.ent_type_ for t in doc])
-# ['His', 'friend', 'PERSON', 'is', 'here', 'with', 'PERSON', 'and', 'PERSON', '.']
-
-print(" ".join([t.text if not t.ent_type_ else t.ent_type_ for t in doc]))"""
-# His friend PERSON is here with PERSON and PERSON .
-
-
-"""def natlanpro(text):
-    text = nlp(text)
-    return " ".join([t.text if not t.ent_type_ else t.ent_type_ for t in text])
-
-text_adj = []
-for t in df['text']:
-    text_adj.append(natlanpro(t))
-
-summary_adj = []
-for i in df['summary']:
-    summary_adj.append(natlanpro(i))
-
-df['text_adj'] = text_adj
-df['summary_adj'] = summary_adj"""
